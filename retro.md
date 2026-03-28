@@ -1,17 +1,21 @@
-# Retrospectiva del Proyecto
+# Retrospectiva - Sprint 3 (Estrella de Mar)
 
-## Qué salió bien
-- Logramos separar la página en componentes.
-- El servidor con Express funciona correctamente.
+## ⭐ Seguir haciendo
+- Uso de componentes reutilizables con EJS
+- Organización del proyecto en carpetas
 
-## Qué problemas tuvimos
-- Al inicio tuvimos problemas instalando Node.js.
-- Nos costó entender cómo cargar componentes con JavaScript.
+## ⭐ Hacer más
+- Mejorar el diseño responsive
+- Optimizar estilos CSS
 
-## Qué podemos mejorar
-- Organizar mejor las tareas del equipo.
-- Probar el proyecto con más tiempo antes de la entrega.
+## ⭐ Dejar de hacer
+- Repetir código HTML
+- Usar archivos innecesarios como components.js
 
-## Qué aprendimos
-- Cómo usar Express para servir páginas.
-- Cómo crear componentes reutilizables en HTML.
+## ⭐ Empezar a hacer
+- Implementar EJS correctamente
+- Usar partials para header y footer
+
+## ⭐ Hacer menos
+- Errores en rutas de imágenes
+- Desorden en archivos
