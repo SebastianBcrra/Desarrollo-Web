@@ -32,11 +32,6 @@ Se implementó el motor de plantillas EJS para reutilizar componentes y mejorar 
 
 ## 🧩 Estructura del proyecto
 
-```
-## 📁 Estructura del proyecto
-
-```
-## Estructura del proyecto
 
 ```
 paginaGym/
