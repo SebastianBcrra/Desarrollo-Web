@@ -36,40 +36,47 @@ Se implementó el motor de plantillas EJS para reutilizar componentes y mejorar 
 ## 📁 Estructura del proyecto
 
 ```
+## Estructura del proyecto
+
+```
 paginaGym/
-│
-├── node_modules/         
-├── public/                
-│   ├── css/
-│   │   └── style.css
-│   ├── img/
-│   └── js/
-│
-├── views/                 
-│   ├── pages/             
-│   │   ├── home.ejs
-│   │   ├── login.ejs
-│   │   └── register.ejs
-│   │
-│   ├── partials/          
-│   │   ├── head.ejs
-│   │   ├── header.ejs
-│   │   └── footer.ejs
-│   │
-│   └── gym/               
-│       ├── hero.ejs
-│       ├── descripcion.ejs
-│       ├── entrenamientos.ejs
-│       ├── horarios.ejs
-│       ├── planes.ejs
-│       └── contacto.ejs
-│
-├── data/                  
-│   └── productos.json
-│
-├── app.js                 
-├── package.json           
-├── package-lock.json              
+
+node_modules/
+
+public/
+    css/
+        style.css
+    img/
+    js/
+
+views/
+    pages/
+        home.ejs
+        login.ejs
+        register.ejs
+
+    partials/
+        head.ejs
+        header.ejs
+        footer.ejs
+
+    gym/
+        hero.ejs
+        descripcion.ejs
+        entrenamientos.ejs
+        horarios.ejs
+        planes.ejs
+        contacto.ejs
+
+data/
+    productos.json
+
+app.js
+package.json
+package-lock.json
+
+```
+           
 ```
 
 ```
