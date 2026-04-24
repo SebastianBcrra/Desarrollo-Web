@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nombre": "Plan Básico",
+    "precio": 50000
+  },
+  {
+    "id": 2,
+    "nombre": "Plan Premium",
+    "precio": 80000
+  },
+  {
+    "id": 3,
+    "nombre": "Plan VIP",
+    "precio": 120000
+  }
+]

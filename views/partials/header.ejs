@@ -1,0 +1,40 @@
+<header class="header">
+
+    <div class="container">
+
+        <!-- LOGO -->
+        <div class="logo">
+            <i class="fas fa-dumbbell"></i>
+            <span>GYM <strong>JDO</strong></span>
+        </div>
+
+        <!-- BOTÓN HAMBURGUESA -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <!-- MENÚ -->
+        <nav class="menu" id="menu">
+
+            <a href="/">Inicio</a>
+            <a href="/#planes">Planes</a>
+
+            <% if (user) { %>
+                <a href="/mis-planes">Mis planes</a>
+                <a href="/logout">Salir</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <a href="/register">Únete</a>
+            <% } %>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<script>
+function toggleMenu() {
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>

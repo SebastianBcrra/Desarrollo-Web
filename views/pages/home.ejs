@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head') %>
+
+<body>
+
+<%- include('../partials/header') %>
+
+<!-- MENSAJE -->
+<% if (query && query.ok) { %>
+    <p style="color:rgb(190, 21, 55); text-align:center;">
+        ✅ Plan seleccionado correctamente
+    </p>
+<% } %>
+
+<main>
+
+    <%- include('../gym/hero') %>
+    <%- include('../gym/descripcion') %>
+    <%- include('../gym/entrenamientos') %>
+    <%- include('../gym/horarios') %>
+
+    <%- include('../gym/planes', { planes: planes }) %>
+
+    <%- include('../gym/contacto') %>
+
+</main>
+
+<%- include('../partials/footer') %>
+
+</body>
+</html>

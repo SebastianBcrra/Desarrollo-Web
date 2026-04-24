@@ -1,0 +1,1 @@
+{"name":"heroku_app","version":"1.0.0","description":"","main":"app.js","scripts":{"start":"node app.js"},"author":"","license":"ISC","dependencies":{"bcryptjs":"^3.0.3","dotenv":"^17.4.2","ejs":"^5.0.1","express":"^4.22.1","express-session":"^1.19.0","mysql2":"^3.22.2"}}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/head') %>
+<body>
+
+<%- include('../partials/header') %>
+
+<section class="planes">
+
+    <h2>Mis Planes</h2>
+
+    <div class="cards">
+
+        <% if (planes.length > 0) { %>
+
+            <% planes.forEach(plan => { %>
+
+                <div class="card">
+
+                    <h3><%= plan.nombre %></h3>
+
+                    <p class="precio">$<%= plan.precio %></p>
+
+                    <p><%= plan.descripcion %></p>
+
+                    <small>Inscrito el: <%= plan.fecha %></small>
+
+                </div>
+
+            <% }) %>
+
+        <% } else { %>
+
+            <p>No has seleccionado ningún plan</p>
+
+        <% } %>
+
+    </div>
+
+</section>
+
+<%- include('../partials/footer') %>
+
+</body>
+</html>

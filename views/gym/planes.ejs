@@ -1,0 +1,28 @@
+<section class="planes" id="planes">
+
+    <h2>Nuestros Planes</h2>
+
+    <div class="cards">
+
+        <% planes.forEach(plan => { %>
+
+            <div class="card">
+
+                <h3><%= plan.nombre %></h3>
+
+                <p class="precio">$<%= plan.precio %></p>
+
+                <!-- 🔥 YA NO HAY DIV BLANCO -->
+                <p class="desc"><%= plan.descripcion %></p>
+
+                <form action="/planes/elegir/<%= plan.id %>" method="POST">
+                    <button class="btn-unete">Elegir Plan</button>
+                </form>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</section>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/head') %>
+<body>
+
+<%- include('../partials/header') %>
+
+<h2>Administrar Planes</h2>
+
+<a href="/admin/planes/new">➕ Nuevo Plan</a>
+
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+    </tr>
+
+    <% planes.forEach(p => { %>
+        <tr>
+            <td><%= p.nombre %></td>
+            <td>$<%= p.precio %></td>
+            <td>
+                <a href="/admin/planes/edit/<%= p.id %>">Editar</a>
+                <a href="/admin/planes/delete/<%= p.id %>">Eliminar</a>
+            </td>
+        </tr>
+    <% }) %>
+
+</table>
+
+<%- include('../partials/footer') %>
+
+</body>
+</html>

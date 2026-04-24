@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<%- include('../partials/head') %>
+<body>
+
+<h2>Editar Plan</h2>
+
+<form action="/admin/planes/update/<%= plan.id %>" method="POST">
+
+    <input name="nombre" value="<%= plan.nombre %>">
+    <input name="precio" value="<%= plan.precio %>">
+    <textarea name="descripcion"><%= plan.descripcion %></textarea>
+
+    <button>Actualizar</button>
+
+</form>
+
+</body>
+</html>
