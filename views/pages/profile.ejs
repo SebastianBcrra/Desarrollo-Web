@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Perfil</title>
+
+    <link rel="stylesheet" href="/public/css/style.css">
+
+</head>
+
+<body>
+
+    <section class="profile-page">
+
+        <div class="profile-card">
+
+            <h1>Mi Perfil</h1>
+
+            <div class="profile-info">
+
+                <h2>
+                    <%= user.nombre %>
+                </h2>
+
+                <p>
+                    <%= user.email %>
+                </p>
+
+            </div>
+
+            <div class="profile-buttons">
+
+                <a href="/" class="btn-profile">
+                    Volver al inicio
+                </a>
+
+                <a href="/logout" class="btn-logout">
+                    Cerrar sesión
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

@@ -1,6 +1,3 @@
-// ===============================
-// IMPORTACIONES
-// ===============================
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -9,9 +6,7 @@ const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
-// ===============================
 // CONFIGURACIÓN
-// ===============================
 
 // Motor de vistas
 app.set('view engine', 'ejs');
@@ -31,9 +26,30 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// ===============================
+// =========================
+// MIDDLEWARES SPRINT 5
+// =========================
+
+function authMiddleware(req, res, next) {
+
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    next();
+}
+
+function guestMiddleware(req, res, next) {
+
+    if (req.session.user) {
+        return res.redirect('/perfil');
+    }
+
+    next();
+}
+
 // JSON (PRODUCTOS CRUD)
-// ===============================
+
 const filePath = path.join(__dirname, 'data/productos.json');
 
 function leerProductos() {
@@ -45,9 +61,8 @@ function guardarProductos(productos) {
     fs.writeFileSync(filePath, JSON.stringify(productos, null, 2));
 }
 
-// ===============================
 // USUARIO MOCK
-// ===============================
+
 const usuarioMock = {
     id: 1,
     nombre: "Usuario Demo",
@@ -55,64 +70,119 @@ const usuarioMock = {
     password: "1234"
 };
 
-// ===============================
-// RUTA PRINCIPAL (AQUÍ ESTABA EL ERROR)
-// ===============================
+// =========================
+// RUTA PRINCIPAL
+// =========================
+
 app.get('/', (req, res) => {
 
-    // 👇 PLANES DINÁMICOS (SOLUCIONA TU ERROR)
     const planes = [
-        { nombre: "Básico", precio: 50000 },
-        { nombre: "Premium", precio: 80000 },
-        { nombre: "VIP", precio: 120000 }
+        {
+            nombre: "Básico",
+            precio: 50000,
+            descripcion: "Acceso a máquinas"
+        },
+        {
+            nombre: "Premium",
+            precio: 80000,
+            descripcion: "Máquinas + clases"
+        },
+        {
+            nombre: "VIP",
+            precio: 120000,
+            descripcion: "Todo incluido + entrenador"
+        }
     ];
 
     res.render('pages/home', {
         user: req.session.user,
-        query: req.query,   // 👈 arregla error del mensaje
-        planes: planes      // 👈 arregla error de planes
+        query: req.query,
+        planes: planes
     });
 });
 
-// ===============================
+// =========================
 // LOGIN / REGISTER
-// ===============================
-app.get('/login', (req, res) => {
-    res.render('pages/login', { user: req.session.user });
+// =========================
+
+app.get('/login', guestMiddleware, (req, res) => {
+
+    res.render('pages/login', {
+        user: req.session.user
+    });
 });
 
-app.get('/register', (req, res) => {
-    res.render('pages/register', { user: req.session.user });
+app.get('/register', guestMiddleware, (req, res) => {
+
+    res.render('pages/register', {
+        user: req.session.user
+    });
 });
 
 app.post('/login', (req, res) => {
 
     const { email, password } = req.body;
 
-    if (email === usuarioMock.email && password === usuarioMock.password) {
+    if (
+        email === usuarioMock.email &&
+        password === usuarioMock.password
+    ) {
+
         req.session.user = usuarioMock;
-        res.redirect('/');
-    } else {
-        res.send("Credenciales incorrectas");
+
+        return res.redirect('/perfil');
     }
+
+    res.send("Credenciales incorrectas");
 });
 
 app.post('/register', (req, res) => {
+
     res.redirect('/login');
 });
 
-app.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
+// =========================
+// PERFIL
+// =========================
+
+app.get('/perfil', authMiddleware, (req, res) => {
+
+    res.render('pages/profile', {
+        user: req.session.user
+    });
 });
 
-// ===============================
-// CRUD JSON (OBLIGATORIO)
-// ===============================
+// =========================
+// LOGOUT
+// =========================
+
+app.get('/logout', (req, res) => {
+
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
+});
+
+// =========================
+// SELECCIONAR PLAN
+// =========================
+
+app.post('/seleccionar-plan/:nombre', authMiddleware, (req, res) => {
+
+    const plan = req.params.nombre;
+
+    res.redirect('/?ok=true');
+});
+
+// =========================
+// CRUD JSON
+// =========================
 
 // GET
 app.get('/productos', (req, res) => {
+
     const productos = leerProductos();
+
     res.json(productos);
 });
 
@@ -128,6 +198,7 @@ app.post('/productos', (req, res) => {
     };
 
     productos.push(nuevo);
+
     guardarProductos(productos);
 
     res.json(nuevo);
@@ -139,19 +210,24 @@ app.put('/productos/:id', (req, res) => {
     let productos = leerProductos();
 
     productos = productos.map(p => {
+
         if (p.id == req.params.id) {
+
             return {
                 ...p,
                 nombre: req.body.nombre,
                 precio: req.body.precio
             };
         }
+
         return p;
     });
 
     guardarProductos(productos);
 
-    res.json({ mensaje: "Producto actualizado" });
+    res.json({
+        mensaje: "Producto actualizado"
+    });
 });
 
 // DELETE
@@ -159,16 +235,21 @@ app.delete('/productos/:id', (req, res) => {
 
     let productos = leerProductos();
 
-    productos = productos.filter(p => p.id != req.params.id);
+    productos = productos.filter(
+        p => p.id != req.params.id
+    );
 
     guardarProductos(productos);
 
-    res.json({ mensaje: "Producto eliminado" });
+    res.json({
+        mensaje: "Producto eliminado"
+    });
 });
 
-// ===============================
+// =========================
 // SERVIDOR
-// ===============================
+// =========================
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

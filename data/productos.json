@@ -1,17 +1,20 @@
 [
   {
     "id": 1,
-    "nombre": "Plan Básico",
-    "precio": 50000
+    "nombre": "Básico",
+    "precio": 50000,
+    "descripcion": "Acceso a máquinas"
   },
   {
     "id": 2,
-    "nombre": "Plan Premium",
-    "precio": 80000
+    "nombre": "Premium",
+    "precio": 80000,
+    "descripcion": "Máquinas + clases"
   },
   {
     "id": 3,
-    "nombre": "Plan VIP",
-    "precio": 120000
+    "nombre": "VIP",
+    "precio": 120000,
+    "descripcion": "Todo incluido + entrenador"
   }
 ]
