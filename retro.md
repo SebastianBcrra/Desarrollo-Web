@@ -1,21 +1,17 @@
-# Retrospectiva - Sprint 3 (Estrella de Mar)
 
-## ⭐ Seguir haciendo
-- Uso de componentes reutilizables con EJS
-- Organización del proyecto en carpetas
+# Retrospectiva Sprint 5
 
-## ⭐ Hacer más
-- Mejorar el diseño responsive
-- Optimizar estilos CSS
+## Comenzar a hacer
+- Mejor organización del código.
 
-## ⭐ Dejar de hacer
-- Repetir código HTML
-- Usar archivos innecesarios como components.js
+## Hacer más
+- Validaciones de formularios.
 
-## ⭐ Empezar a hacer
-- Implementar EJS correctamente
-- Usar partials para header y footer
+## Continuar haciendo
+- Uso de GitHub y ramas.
 
-## ⭐ Hacer menos
-- Errores en rutas de imágenes
-- Desorden en archivos
+## Hacer menos
+- Código repetido.
+
+## Dejar de hacer
+- Mezclar lógica con vistas.
