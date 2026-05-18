@@ -77,7 +77,27 @@ package-lock.json
 ```
 
 ---
+## Diagrama base de datos
+```
+USUARIOS
+-------------------------
+id
+nombre
+email
+password
+createdAt
+updatedAt
 
+
+PRODUCTOS
+-------------------------
+id
+nombre
+precio
+descripcion
+createdAt
+updatedAt
+```
 ## ⚙️ Funcionamiento
 
 La aplicación utiliza Express como servidor web y EJS como motor de plantillas.
