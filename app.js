@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const { Sequelize, DataTypes } = require('sequelize');
 
+const { body, validationResult } = require('express-validator');
+
 const app = express();
 const PORT = 3000;
 
@@ -137,6 +139,49 @@ function guestMiddleware(req, res, next) {
 
 
 // ======================
+// VALIDACIONES
+// ======================
+
+const registerValidation = [
+
+    body('nombre')
+        .notEmpty().withMessage('El nombre es obligatorio')
+        .isLength({ min: 3 }).withMessage('El nombre debe tener mínimo 3 caracteres'),
+
+    body('email')
+        .notEmpty().withMessage('El email es obligatorio')
+        .isEmail().withMessage('Debe ingresar un email válido'),
+
+    body('password')
+        .notEmpty().withMessage('La contraseña es obligatoria')
+        .isLength({ min: 4 }).withMessage('La contraseña debe tener mínimo 4 caracteres')
+
+];
+
+const loginValidation = [
+
+    body('email')
+        .notEmpty().withMessage('El email es obligatorio')
+        .isEmail().withMessage('Email inválido'),
+
+    body('password')
+        .notEmpty().withMessage('La contraseña es obligatoria')
+
+];
+
+const productValidation = [
+
+    body('nombre')
+        .notEmpty().withMessage('El nombre del producto es obligatorio'),
+
+    body('precio')
+        .notEmpty().withMessage('El precio es obligatorio')
+        .isNumeric().withMessage('El precio debe ser numérico')
+
+];
+
+
+// ======================
 // HOME
 // ======================
 
@@ -167,12 +212,23 @@ app.get('/', async (req, res) => {
 app.get('/login', guestMiddleware, (req, res) => {
 
     res.render('pages/login', {
-        user: req.session.user
+        user: req.session.user,
+        errors: []
     });
 
 });
 
-app.post('/login', async (req, res) => {
+app.post('/login', loginValidation, async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.render('pages/login', {
+            user: null,
+            errors: errors.array()
+        });
+    }
 
     const { email, password } = req.body;
 
@@ -186,7 +242,11 @@ app.post('/login', async (req, res) => {
         });
 
         if (!usuario) {
-            return res.send('Credenciales incorrectas');
+
+            return res.render('pages/login', {
+                user: null,
+                errors: [{ msg: 'Credenciales incorrectas' }]
+            });
         }
 
         req.session.user = usuario;
@@ -211,14 +271,23 @@ app.post('/login', async (req, res) => {
 app.get('/register', guestMiddleware, (req, res) => {
 
     res.render('pages/register', {
-        user: req.session.user
+        user: req.session.user,
+        errors: []
     });
 
 });
 
-app.post('/register', async (req, res) => {
+app.post('/register', registerValidation, async (req, res) => {
 
-    console.log(req.body);
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.render('pages/register', {
+            user: null,
+            errors: errors.array()
+        });
+    }
 
     const { nombre, email, password } = req.body;
 
@@ -286,7 +355,14 @@ app.get('/productos', async (req, res) => {
 
 // POST
 
-app.post('/productos', async (req, res) => {
+app.post('/productos', productValidation, async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.status(400).json(errors.array());
+    }
 
     try {
 
@@ -310,7 +386,14 @@ app.post('/productos', async (req, res) => {
 
 // PUT
 
-app.put('/productos/:id', async (req, res) => {
+app.put('/productos/:id', productValidation, async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+
+        return res.status(400).json(errors.array());
+    }
 
     try {
 
